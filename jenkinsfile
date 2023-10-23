@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your code from GitHub
+                script {
+                    checkout([$class: 'GitSCM',
+                        branches: [[name: '*/main']],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '']],
+                        submoduleCfg: [],
+                        userRemoteConfigs: [[url: 'https://github.com/FajrZafar/Mlops_Activity1']]
+                    ])
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip3 install -r requirements.txt'
+                sh 'pip3 install pytest'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh '/Users/fajrzafar-nu/opt/anaconda3/bin/python3 -m pytest --junitxml=${WORKSPACE}/report.xml test_main.py'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Archive test results
+            junit '**/report.xml'
+        }
+    }
+}
