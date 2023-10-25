@@ -30,14 +30,14 @@ pipeline {
         }
     }
 
-    stage('Groovy'){
-            steps {
-                script {
-                    groove = load 'yes.groovy'
-                    groove.testfunc('prod')
+        stage('Groovy'){
+                steps {
+                    script {
+                        groove = load 'yes.groovy'
+                        groove.testfunc('prod')
+                    }
                 }
             }
-        }
 
     post {
         always {
