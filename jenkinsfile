@@ -30,6 +30,15 @@ pipeline {
         }
     }
 
+    stage('Groovy'){
+            steps {
+                script {
+                    groove = load 'zara.groovy'
+                    groove.testfunc('prod')
+                }
+            }
+        }
+
     post {
         always {
             // Archive test results
