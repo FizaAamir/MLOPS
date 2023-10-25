@@ -29,20 +29,20 @@ pipeline {
             }
         }
     }
-    
+
+        stage('Groovy'){
+                steps {
+                    script {
+                        groove = load 'yes.groovy'
+                        groove.testfunc('prod')
+                    }
+                }
+            }
+
     post {
         always {
             // Archive test results
             junit '**/report.xml'
-        }
-    }
-}
-
-stage('Groovy') {
-    steps {
-        script {
-            groove = load 'yes.groovy'
-            groove.testfunc('prod')
         }
     }
 }
