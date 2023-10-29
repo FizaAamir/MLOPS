@@ -1,7 +1,11 @@
-def testfunc(String yes){
-  if (yes == 'prod'){
+def testfunc(String yes)
+{
+  if (yes == 'prod')
+  {
     println('Deploying to production')
-  } else {
+  } 
+  else 
+  {
     println('Deploying to test')
   }
 }
