@@ -31,7 +31,7 @@ pipeline {
         stage('Groovy') {
             steps {
                 script {
-                    groove = load 'fajr.groovy'
+                    groove = load 'yes.groovy'
                     groove.testfunc('prod')
                 }
             }
